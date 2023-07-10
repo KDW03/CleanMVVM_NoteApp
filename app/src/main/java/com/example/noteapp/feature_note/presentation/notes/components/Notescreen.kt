@@ -114,7 +114,7 @@ fun NoteScreen(
                 exit = fadeOut() + slideOutVertically()
             ) {
                 OrderSection(modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .padding(vertical = 16.dp),
                     noteOrder = state.noteOrder,
                     onOrderChange = { changeOrder ->
