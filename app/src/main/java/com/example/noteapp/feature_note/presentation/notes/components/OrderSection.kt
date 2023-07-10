@@ -56,14 +56,14 @@ fun OrderSection(
             DefaultRadioButton(
                 text = "Ascending",
                 selected = noteOrder.orderType is OrderType.Ascending,
-                onSelect = { onOrderChange(noteOrder.copy(orderType = OrderType.Descending)) })
+                onSelect = { onOrderChange(noteOrder.copy(orderType = OrderType.Ascending)) })
 
             Spacer(modifier = Modifier.width(8.dp))
 
             DefaultRadioButton(
                 text = "Descending",
                 selected = noteOrder.orderType is OrderType.Descending,
-                onSelect = { onOrderChange(noteOrder.copy(orderType = OrderType.Ascending)) })
+                onSelect = { onOrderChange(noteOrder.copy(orderType = OrderType.Descending)) })
         }
     }
 }
