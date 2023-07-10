@@ -145,7 +145,7 @@ fun AddEditNoteScreen(
                                     noteBackgroundAnimatable.animateTo(
                                         targetValue = Color(colorInt),
                                         animationSpec = tween(
-                                            durationMillis = 6600
+                                            durationMillis = 500
                                         )
                                     )
                                 }
