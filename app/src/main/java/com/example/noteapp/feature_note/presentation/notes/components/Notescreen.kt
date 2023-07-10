@@ -36,9 +36,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.noteapp.feature_note.presentation.notes.NotesEvent
 import com.example.noteapp.feature_note.presentation.notes.NotesViewModel
+import com.example.noteapp.feature_note.presentation.util.Screen
 import com.example.noteapp.ui.theme.NoteAppTheme
 import kotlinx.coroutines.launch
 
@@ -65,8 +67,8 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteScreen(
-    navController: NavController? = null,
-    viewModel: NotesViewModel
+    navController: NavController,
+    viewModel: NotesViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
     val snackbarHostState = remember { SnackbarHostState() }
@@ -75,7 +77,7 @@ fun NoteScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate(Screen.AddEditNoteScreen.route) },
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")

@@ -42,6 +42,32 @@ import com.example.noteapp.feature_note.presentation.add_edit_note.components.Tr
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * LaunchedEffect는 key1 = true로 설정되어 있다 이는 LaunchedEffect가 한 번만 실행되도록 합
+ * LaunchedEffect 내부에서 viewModel.eventFlow.collectLatest를 사용하여 eventFlow의 최신 이벤트를 수집
+ *
+ * 전달된 코드 블록으로 코루틴을 시작
+ * LaunchedEffect가 Composition에서 벗어나면 코루틴이 취소
+ * LaunchedEffec가 다른 키로 재구성되면 기존 코루틴이 취소되고 새로운 suspend 함수가 새로운 코루틴에서 시작
+ *
+ * noteBackgroundAnimatable은 remember 함수를 사용하여 정의된 Animatable 객체
+ * Animatable은 Jetpack Compose에서 애니메이션을 적용할 수 있는 객체
+ *
+ * LaunchedEffect를 사용하지 않고 코루틴을 직접 시작하면, Composable 함수가 재구성될 때마다 코루틴이 다시 시작될 수 있습니다
+ * LaunchedEffect를 사용하면 Composable 함수가 재구성되더라도 코루틴이 한 번만 실행되도록
+ *
+ *
+ * Arrangement.SpaceBetween : 첫 번째 자식 Composable과 마지막 자식 Composable이 시작 부분과 끝 부분에 배치되도록 한다
+ * 나머지 자식 Composable은 균등한 간격으로 배치 (간격의 부모의 너비에 따라 결정)
+ *
+ * animateTo 함수는 Animatable의 값을 애니메이션하여 변경하는 함수
+ * targetValue와 animationSpec 매개 변수를 사용
+ *
+ * targetValue: 애니메이션의 목표 값입니다. 이 경우 목표 값은 Color(colorInt)로 설정
+ * animationSpec: 애니메이션의 사양을 결정하는 매개 변수
+ *
+ *
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditNoteScreen(
@@ -74,7 +100,6 @@ fun AddEditNoteScreen(
                     navController.navigateUp()
                 }
             }
-
         }
     }
 
@@ -126,11 +151,10 @@ fun AddEditNoteScreen(
                                 }
                                 viewModel.onEvent(AddEditNoteEvent.ChangeColor(colorInt))
                             }
-
                     )
                 }
-
             }
+
             Spacer(modifier = Modifier.height(16.dp))
 
             TransparentHintTextFiled(
