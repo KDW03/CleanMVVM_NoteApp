@@ -62,6 +62,10 @@ import com.example.noteapp.ui.theme.NoteAppTheme
  * - Ellipsis: 텍스트가 최대 줄 수를 초과하는 경우, 초과하는 부분을 말줄임표(…)로 표시
  * - Visible: 텍스트가 최대 줄 수를 초과하는 경우, 초과하는 부분을 그대로 표시
  *
+ *
+ * Modifier.align 함수를 사용하여 컴포저블의 위치를 설정가능
+ *
+ *
  */
 
 @Composable
