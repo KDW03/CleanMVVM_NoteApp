@@ -102,11 +102,11 @@ fun NoteScreen(
                     text = "Your note",
                     style = MaterialTheme.typography.headlineMedium
                 )
-            }
-            IconButton(onClick = { viewModel.onEvent(NotesEvent.ToggleOrderSection) }) {
-                Icon(imageVector = Icons.Default.Sort, contentDescription = "Sort")
-            }
 
+                IconButton(onClick = { viewModel.onEvent(NotesEvent.ToggleOrderSection) }) {
+                    Icon(imageVector = Icons.Default.Sort, contentDescription = "Sort")
+                }
+            }
 
             AnimatedVisibility(
                 visible = state.isOrderSectionVisible,
@@ -117,8 +117,8 @@ fun NoteScreen(
                     .fillMaxSize()
                     .padding(vertical = 16.dp),
                     noteOrder = state.noteOrder,
-                    onOrderChange = {
-                        viewModel.onEvent(NotesEvent.Order(it))
+                    onOrderChange = { changeOrder ->
+                        viewModel.onEvent(NotesEvent.Order(changeOrder))
                     })
 
             }
@@ -131,7 +131,10 @@ fun NoteScreen(
                         note = note, modifier = Modifier
                             .fillMaxSize()
                             .clickable {
-
+                                navController.navigate(
+                                    Screen.AddEditNoteScreen.route
+                                            + "?noteId=${note.id}&noteColor=${note.color}"
+                                )
                             },
                         onDeleteClick = {
                             viewModel.onEvent(NotesEvent.DeleteNote(note))
