@@ -1,4 +1,4 @@
-package com.example.noteapp.feature_note.presentation.add_edit_note
+package com.example.noteapp.feature_note.presentation.add_edit_note.components
 
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
@@ -38,7 +38,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.noteapp.feature_note.domain.model.Note
-import com.example.noteapp.feature_note.presentation.add_edit_note.components.TransparentHintTextFiled
+import com.example.noteapp.feature_note.presentation.add_edit_note.AddEditNoteEvent
+import com.example.noteapp.feature_note.presentation.add_edit_note.AddEditNoteViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
