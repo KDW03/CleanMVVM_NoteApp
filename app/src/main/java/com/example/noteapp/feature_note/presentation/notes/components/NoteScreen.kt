@@ -34,14 +34,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.noteapp.feature_note.core.util.TestTags
 import com.example.noteapp.feature_note.presentation.notes.NotesEvent
 import com.example.noteapp.feature_note.presentation.notes.NotesViewModel
 import com.example.noteapp.feature_note.presentation.util.Screen
-import com.example.noteapp.ui.theme.NoteAppTheme
 import kotlinx.coroutines.launch
 
 
@@ -80,7 +80,7 @@ fun NoteScreen(
                 onClick = { navController.navigate(Screen.AddEditNoteScreen.route) },
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Add")
             }
         },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
@@ -115,7 +115,8 @@ fun NoteScreen(
             ) {
                 OrderSection(modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 16.dp),
+                    .padding(vertical = 16.dp)
+                    .testTag(TestTags.ORDER_SECTION),
                     noteOrder = state.noteOrder,
                     onOrderChange = { changeOrder ->
                         viewModel.onEvent(NotesEvent.Order(changeOrder))
