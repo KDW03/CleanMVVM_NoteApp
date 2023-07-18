@@ -24,23 +24,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action/@v1
-  tests:
-    needs: validation
-    name: Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: zulu
-          java-version: 17
-          cache: gradle
-      - name: Run tests
-        run: ./gradlew test
   build:
-    needs: tests
+    needs: validation
     # job이 실행되는 가상 환경의 운영체제를 정의
     runs-on: ubuntu-latest
     # 순차적으로 실행될 job의 실행 단계를 나열 -> 각 단계는 순차적으로 실행
@@ -64,3 +49,18 @@ jobs:
       # Gradle을 이용해 프로젝트 빌드
       - name: Build with Gradle
         run: ./gradlew build
+  tests:
+    needs: build
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
+          cache: gradle
+      - name: Run tests
+        run: ./gradlew test
